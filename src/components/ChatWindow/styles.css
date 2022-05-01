@@ -1,0 +1,127 @@
+.chat_window {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+
+}
+
+.chat_window_main::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+}
+      
+      .chat_window_main::-webkit-scrollbar-thumb {
+        background-color: rgba(0,0,0,0.2);
+}
+
+.chat_window_header {
+        height: 60px;
+        border-bottom: 1px solid #CCC;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.chat_window_header_info {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+}
+
+.chat_window_header_avatar {
+       width: 40px;
+       height: 40px;
+       border-radius: 50%;
+       margin: 0px 15px;
+}
+
+.chat_window_header_name {
+        font-size: 18px;
+        color: #000;
+}
+
+.chat_window_header_buttons {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+}
+
+
+.chat_window_btn{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+        margin-right: 5px;
+}
+
+.chat_window_main {
+        flex:1;
+        overflow-y: auto;/* scroll  */
+
+        background-color: #e5DDD5;
+        background-size: cover;
+        background-position: center;
+        background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+
+        padding: 20px 30px;
+}
+
+.chat_window_footer {
+        height: 62px;
+        display: flex;
+        align-items: center;
+
+}
+
+.chat_window_pre {
+        display: flex;
+        margin: 0px 15px;
+}
+
+.chat_window_inputarea {
+        flex: 1;
+}
+
+.chat_window_input {
+        width: 100%;
+        height: 40px;
+
+        border: 0;
+        outline: 0;
+        background-color: #fff;
+        color: #4a4a4a;
+
+        border-radius: 20px;
+        padding-left: 15px;
+        font-size: 15px;
+
+}
+
+.chat_window_pos {
+        display: flex;
+
+        margin: 0px 15px;
+}
+
+.chat_window_emojiarea {
+        height: 200px;
+        overflow-y: hidden;
+        transition: all ease 0.3s;
+}
+
+.chat_window_emojiarea aside.emoji-picker-react {
+        width: auto;
+        background: none;
+        
+}
+
+.chat_window_emojiarea aside.emoji-picker-react .emoji-group:before{
+        background: none;
+}
+
