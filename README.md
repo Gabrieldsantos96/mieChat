@@ -1,3 +1,2 @@
-SE TRATA DE UM PROJETO DESENVOLVIDO EM LIVE PELO BONIEKY, 
-PORÉM NÃO FOI USADO CONTEXT E ESTOU PASSANDO FAZENDO ESSAS
- MODIFICAÇÕES E ALGUMAS ALTERAÇÕES.
+Se trata de um projeto do clone whatsapp pelo em live pelo Bonieky, porém não foi usado context.
+por isso estou refazendo o projeto usando context e alterando algumas coisas.
