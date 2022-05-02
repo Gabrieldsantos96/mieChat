@@ -105,6 +105,25 @@ export default {
             body: body,
             date: now
          })
-      })
+      });
+
+      for (let i in users ) {
+         let u = await db.collection('users').doc(users[i]).get(); // para cada usuário vai pegar todos os dados
+         let uData = u.data(); // guarda tudo dentro de uData
+         if(uData.chats) { //se existir algum chat 
+            let chats=[... uData.chats]; // guarda tudo dentro de chats
+
+            for(let e in chats) { // se tiver chat, entra nesse laço
+                if(chats[e].chatId == chatData.chatId){ // se o chat id de algum dos chats for igual ao chat id passado no message
+                     chats[e].lastmessage=body; // o chat encontrado recebe um lastmessage 
+                     chats[e].lastmessageDate = now; 
+      }
+   }
+      await db.collection('users').doc(users[i]).update({ // update da chats de todos os users
+         chats
+         });
+         }
+      }
    }
 };
+
