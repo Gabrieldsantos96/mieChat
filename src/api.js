@@ -66,17 +66,45 @@ export default {
          if(doc.exists) {
             let data = doc.data();
                if(data.chats) {
+                  let chats = [...data.chats];
+                  chats.sort((a,b) => {
+                     if(a.lastmessageDate === undefined) {
+                        return -1;
+                     }
+                     if(b.lastmessageDate === undefined) {
+                        return -1;
+                     }
+                     if(a.lastmessageDate < b.lastmessageDate) {
+                        return;
+                     } else {
+                        return -1;
+                     }
+                  })
                   setChatlist(data.chats);
             }
          }
       })
    },
-   onChatContent:(chatId,setMessages) => {
+   onChatContent:(chatId,setMessages,setUsers) => { 
       return db.collection('chats').doc(chatId).onSnapshot((doc) => {
          if(doc.exists) {
             let data = doc.data();
             setMessages(data.messages);
+            setUsers(data.users);
          }
+      })
+   },
+   sendMessage: async (chatData,userId,type,body,users) => {
+
+      let now = new Date();
+
+      db.collection('chats').doc(chatData.chatId).update({
+         messages: firebase.firestore.FieldValue.arrayUnion({
+            type: type,
+            author: userId,
+            body: body,
+            date: now
+         })
       })
    }
 };

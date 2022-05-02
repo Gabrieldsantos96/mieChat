@@ -9,6 +9,7 @@ import useData from '../../hooks/useData';
 import MessageItem from '../MessageItem';
 import './styles.css';
 import {useEffect,useRef} from 'react';
+import Api from '../../api';
 
 function ChatWindow() {
   const { showEmoji, 
@@ -18,13 +19,24 @@ function ChatWindow() {
     listening,
     messages,
     activeChat,
+    setMessages,
+    setUsers,
+    users,
     handleEmojiClick,
     handleOpenEmoji,
     handleSendClick,
-    handleMicClick
+    handleMicClick,
+    handleInputKeyUp
     } = useData();
 
     const body = useRef();
+
+    useEffect(() => {
+      setMessages([]);
+      let unsub = Api.onChatContent(activeChat.chatId,setMessages,setUsers);
+      return unsub;
+
+    },[activeChat.chatId]);
 
     useEffect(() => {
       if(body.current.scrollHeight > body.current.offsetHeight) { // o conteudo do body é maior que a altura do próprio body?
@@ -37,7 +49,7 @@ function ChatWindow() {
 
             <div className="chat_window_header_info">
                 <img  className="chat_window_header_avatar"src={activeChat.image} alt=""/>
-                <div className='chat_window_header_name'> {activeChat.title}</div>
+                <div className='chat_window_header_name'> {activeChat.title} - {activeChat.chatId}</div>
             </div>
 
           <div className='chat_window_header_buttons'>
@@ -96,6 +108,7 @@ function ChatWindow() {
            placeholder='Digite uma mensagem'
            value={text}
            onChange={(e) => setText(e.target.value)}
+           onKeyUp={handleInputKeyUp}
            >
           </input>
 

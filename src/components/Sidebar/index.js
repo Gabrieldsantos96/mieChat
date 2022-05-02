@@ -12,10 +12,6 @@ function Sidebar() {
 chatlist,setActiveChat,activeChat,setShowNewChat
 ,user  } = useData();
 
-  const handleTeste = () => {
-    console.log(user)
-  }
-
   return (
     <div className="sidebar">
       <NewChat/>
@@ -49,7 +45,6 @@ chatlist,setActiveChat,activeChat,setShowNewChat
         
         </div>
      </div>
-     <button onClick={handleTeste}></button>
 
      <div className="chat_list">
           {

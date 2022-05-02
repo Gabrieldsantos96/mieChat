@@ -9,7 +9,7 @@ import { getItem } from '../../localStorage';
 
 function Home () {
 
-const { user,setContacts,setChatlist} = useData();
+const { user,setContacts,setChatlist,chatlist} = useData();
 
    useEffect(() => {
       const userId = getItem('token');
@@ -18,6 +18,7 @@ const { user,setContacts,setChatlist} = useData();
          let localAux = results;
          console.log(localAux);
          setContacts(localAux);
+         console.log({Chat:chatlist})
       }
       getList();
 

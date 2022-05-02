@@ -15,6 +15,7 @@ function ChatItem ({onClick,active,item}) {
       setTime(`${hours}:${minutes}`);
     }
   },[item])
+  
   return (
     <div 
     className={`chat_item ${active? 'active': ''}`}

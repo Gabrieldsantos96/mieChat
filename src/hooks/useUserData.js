@@ -6,11 +6,7 @@ import { useNavigate } from 'react-router-dom';
         export function useUserData(){
           const navigate = useNavigate();
           const [chatlist, setChatlist] = useState([]);
-            const [user,setUser] = useState({
-              id:'nT5t2aY4XPdC5qEGnPx7hSzKVJi2',
-              name: 'Gabriel 1',
-              avatar: 'https://graph.facebook.com/5195007483871401/picture'
-            });
+            const [user,setUser] = useState(null);
             const [activeChat,setActiveChat] = useState({});
             const [showEmoji,setShowEmoji] = useState(false);
             const [showNewChat,setShowNewChat] = useState(false);
@@ -18,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
             const [listening,setListening] = useState(false);
             const [contacts,setContacts] = useState([])
             const [messages,setMessages] = useState([]);
+            const [users,setUsers] = useState([]);
 
             let recognition = null;
             let speechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
@@ -77,7 +74,17 @@ import { useNavigate } from 'react-router-dom';
               }
             
             const handleSendClick = () => {
-                
+                if(text !== '') {
+                  Api.sendMessage(activeChat,user.id,'text',text,users);
+                  setText('');
+                  setShowEmoji(false);
+                }
+            }
+
+          const handleInputKeyUp = (e) => {
+              if(e.keyCode === 13) {
+                handleSendClick();
+              }
             }
             
             const addNewChat = async (user2) => {
@@ -103,6 +110,8 @@ import { useNavigate } from 'react-router-dom';
         text,setText,
         listening,
         messages,
+        users,
+        setUsers,
         setMessages,
         handleEmojiClick,
         handleOpenEmoji,
@@ -110,6 +119,7 @@ import { useNavigate } from 'react-router-dom';
         handleSendClick,
         handleFacebookLogin,
         handleLoginData,
-        addNewChat
+        addNewChat,
+        handleInputKeyUp
     }
 }

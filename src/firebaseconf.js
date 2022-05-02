@@ -1,5 +1,5 @@
 export default {
-   apiKey: "AIzaSyAQpnF4VyoPHWePLDwBHkYN_FQgATxTmNA",
+   apiKey: "AIzaSyAQpnF4VyoPHWePLDwBHkYN_FQgATxTmNA1",
    authDomain: "miechat-f0d86.firebaseapp.com",
    projectId: "miechat-f0d86",
    storageBucket: "miechat-f0d86.appspot.com",
