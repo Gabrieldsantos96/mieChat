@@ -1,50 +1,23 @@
 import { useRef, useState ,useEffect} from "react";
 import Api from '../api';
-import { setItem } from "../localStorage";
+import { setItem,getItem } from "../localStorage";
 import { useNavigate } from 'react-router-dom';
 
         export function useUserData(){
-          const [chatlist, setChatlist] = useState([
-                {chatId:1, title: 'Fulano de tal', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU'},
-                {chatId:2, title: 'Fulano de 2', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU'},
-                {chatId:3, title: 'Fulano de 3', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU'},
-                {chatId:4, title: 'Fulano de 4', image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU'},
-            ]);
-            const [user,setUser] = useState(null);
+          const navigate = useNavigate();
+          const [chatlist, setChatlist] = useState([]);
+            const [user,setUser] = useState({
+              id:'nT5t2aY4XPdC5qEGnPx7hSzKVJi2',
+              name: 'Gabriel 1',
+              avatar: 'https://graph.facebook.com/5195007483871401/picture'
+            });
             const [activeChat,setActiveChat] = useState({});
             const [showEmoji,setShowEmoji] = useState(false);
             const [showNewChat,setShowNewChat] = useState(false);
             const [text,setText] = useState("");
             const [listening,setListening] = useState(false);
-            const [contacts,setContacts] = useState([
-                {id: 123, avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU", name: 'Mauro'},
-                {id: 2, avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU", name: 'Dani'},
-                {id: 3 ,avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU", name: 'Mateus'},
-                {id: 1, avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU", name: 'gasbs'},
-
-            ])
+            const [contacts,setContacts] = useState([])
             const [messages,setMessages] = useState([
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'},
                 {author:123,body: 'blalblblbla'},
                 {author:123,body: 'blalblblbla'},
                 {author:1234,body: 'blalblblbla'}]);
@@ -60,7 +33,7 @@ import { useNavigate } from 'react-router-dom';
                 const result = await Api.fbPopup();
                 if(result) {
                    handleLoginData(result.user);
-          
+                    navigate('/')
                 } else {
                    window.alert("Erro!");
                 }
@@ -72,8 +45,12 @@ import { useNavigate } from 'react-router-dom';
                   name: u.displayName,
                   avatar: u.photoURL
                 };
+                  Api.addUser(newUser);
                   setUser(newUser);
                   setItem('token', u.uid);
+                  
+                  console.log(user);
+                 
                  
               }
 
@@ -105,7 +82,12 @@ import { useNavigate } from 'react-router-dom';
             const handleSendClick = () => {
                 
             }
-                  
+            
+            const addNewChat = async (user2) => {
+              await Api.addNewChat(user,user2);
+
+              setShowNewChat(false);
+            }
       
 
     return {
@@ -129,6 +111,7 @@ import { useNavigate } from 'react-router-dom';
         handleMicClick,
         handleSendClick,
         handleFacebookLogin,
-        handleLoginData
+        handleLoginData,
+        addNewChat
     }
 }

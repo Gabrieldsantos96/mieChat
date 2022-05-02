@@ -10,7 +10,11 @@ import './styles.css';
 function Sidebar() {
   const {
 chatlist,setActiveChat,activeChat,setShowNewChat
-  } = useData();
+,user  } = useData();
+
+  const handleTeste = () => {
+    console.log(user)
+  }
 
   return (
     <div className="sidebar">
@@ -18,7 +22,7 @@ chatlist,setActiveChat,activeChat,setShowNewChat
      <header>
         <img
         className='header_avatar'
-         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU"
+         src={user ? user.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo7WfE6wFfdpeFph92LdEFJFnula0ecIObiQ&usqp=CAU'}
           alt=""/>
 
           <div className='header_buttons'>
@@ -45,6 +49,7 @@ chatlist,setActiveChat,activeChat,setShowNewChat
         
         </div>
      </div>
+     <button onClick={handleTeste}></button>
 
      <div className="chat_list">
           {
@@ -58,7 +63,6 @@ chatlist,setActiveChat,activeChat,setShowNewChat
             ))
           }
      </div>
-
 
     </div>
 
