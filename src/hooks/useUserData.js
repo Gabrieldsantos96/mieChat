@@ -17,10 +17,7 @@ import { useNavigate } from 'react-router-dom';
             const [text,setText] = useState("");
             const [listening,setListening] = useState(false);
             const [contacts,setContacts] = useState([])
-            const [messages,setMessages] = useState([
-                {author:123,body: 'blalblblbla'},
-                {author:123,body: 'blalblblbla'},
-                {author:1234,body: 'blalblblbla'}]);
+            const [messages,setMessages] = useState([]);
 
             let recognition = null;
             let speechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
@@ -106,6 +103,7 @@ import { useNavigate } from 'react-router-dom';
         text,setText,
         listening,
         messages,
+        setMessages,
         handleEmojiClick,
         handleOpenEmoji,
         handleMicClick,

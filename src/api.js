@@ -70,5 +70,13 @@ export default {
             }
          }
       })
+   },
+   onChatContent:(chatId,setMessages) => {
+      return db.collection('chats').doc(chatId).onSnapshot((doc) => {
+         if(doc.exists) {
+            let data = doc.data();
+            setMessages(data.messages);
+         }
+      })
    }
 };

@@ -17,6 +17,7 @@ function ChatWindow() {
     user,
     listening,
     messages,
+    activeChat,
     handleEmojiClick,
     handleOpenEmoji,
     handleSendClick,
@@ -35,8 +36,8 @@ function ChatWindow() {
        <div className="chat_window_header">
 
             <div className="chat_window_header_info">
-                <img  className="chat_window_header_avatar"src={user.avatar} alt=""/>
-                <div className='chat_window_header_name'> Gabriel</div>
+                <img  className="chat_window_header_avatar"src={activeChat.image} alt=""/>
+                <div className='chat_window_header_name'> {activeChat.title}</div>
             </div>
 
           <div className='chat_window_header_buttons'>
